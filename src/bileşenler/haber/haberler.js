@@ -117,102 +117,50 @@ const data = [
 */
 const articleDiv = document.querySelector(".articles");
 
-// const newDataBaslik = data.map((e) => {
-//   return e.baslik;
-// });
-// const newDataTarih = data.map((e) => {
-//   return e.tarih;
-// });
-// const newDatailkParagraf = data.map((e) => {
-//   return e.ilkParagraf;
-// });
-// const newDataikinciParagraf = data.map((e) => {
-//   return e.ikinciParagraf;
-// });
-// const newDataucuncuParagraf = data.map((e) => {
-//   return e.ucuncuParagraf;
-// });
+function haberYapici(haber){
 
-// console.log(newDataBaslik);
-// console.log(newDataTarih);
-// console.log(newDatailkParagraf);
-// console.log(newDataikinciParagraf);
-// console.log(newDataucuncuParagraf);
+  
+  const yeniHaber = document.createElement("div");
+  yeniHaber.classList.add("article");
 
-// function makaleler(data) {
+  const header =  document.createElement('h2');
+  header.textContent = haber["baslik"];
+  yeniHaber.appendChild(header);
 
+  const tarih = document.createElement('p');
+  tarih.classList.add("tarih");
+  tarih.textContent = haber["tarih"];
+  yeniHaber.appendChild(tarih);
 
-//   const h2Text = document.createElement("h2");
-//   const pTarih = document.createElement("p");
-//   const pParagraf1 = document.createElement("p");
-//   const pParagraf2 = document.createElement("p");
-//   const pParagraf3 = document.createElement("p");
-//   const spanT = document.createElement("span");
+  const paragraf1 = document.createElement('p');
+  paragraf1.textContent = haber.ilkParagraf;
+  yeniHaber.appendChild(paragraf1);
 
-//   spanT.textContent = "+";
+  const paragraf2 = document.createElement('p');
+  paragraf2.textContent = haber.ikinciParagraf;
+  yeniHaber.appendChild(paragraf2);
 
-//   pTarih.classList.add("tarih");
-//   spanT.classList.add("expandButton");
+  const paragraf3 = document.createElement('p');
+  paragraf3.textContent = haber.ucuncuParagraf;
+  yeniHaber.appendChild(paragraf3);
 
-//   h2Text.textContent = data.baslik;
-//   pTarih.textContent = data.tarih;
-//   pParagraf1.textContent = data.ilkParagraf;
-//   pParagraf2.textContent = data.ikinciParagraf;
-//   pParagraf3.textContent = data.ucuncuParagraf;
+  const btn = document.createElement('span');
+  btn.classList.add("expandButton");
+  btn.textContent = "+";
+  yeniHaber.appendChild(btn);
 
-//   articleDiv.appendChild(h2Text);
-//   articleDiv.appendChild(pTarih);
-//   articleDiv.appendChild(pParagraf1);
-//   articleDiv.appendChild(pParagraf2);
-//   articleDiv.appendChild(h2Text);
+  btn.addEventListener("click" , (event) => {
+    if(document.querySelector(".article-open") !== null && !event.target.parentElement.classList.contains("article-open")){
+      document.querySelector(".article-open").classList.remove("article-open")
+    }
+    event.target.parentElement.classList.toggle("article-open")
+  })
 
-//   return articleDiv;
-// }
+  return yeniHaber;
 
-// console.log(makaleler(data))
-
-// console.log(data[3].tarih)
-
-// function icerik(icerikData) {
-
-//   const articles = document.createElement("div");
-//   articles.classList.add("article");
-
-//     for (const dt of icerikData) {
-//       const h2Text = document.createElement("h2");
-//       const pTarih = document.createElement("p");
-//       const pParagraf1 = document.createElement("p");
-//       const pParagraf2 = document.createElement("p");
-//       const pParagraf3 = document.createElement("p");
-//       const spanT = document.createElement("span");
-
-//       pTarih.classList.add("tarih");
-//       spanT.classList.add("expandButton");
-
-//       h2Text.textContent = dt.baslik;
-//       pTarih.textContent = dt.tarih;
-//       pParagraf1.textContent = dt.ilkParagraf;
-//       pParagraf2.textContent = dt.ikinciParagraf;
-//       pParagraf3.textContent = dt.ucuncuParagraf;
-
-//       articles.appendChild(h2Text);
-//       articles.appendChild(pTarih);
-//       articles.appendChild(pParagraf1);
-//       articles.appendChild(pParagraf2);
-//       articles.appendChild(h2Text);
-
-//     }
-
-//   return articles;
-//   };
-
-// let newComponents = data.map((e) => {
-//   let newData = icerik(e);
-
-//   // .map kullandığımızda her zaman bir şey döndürmemiz gerekir.
-//   return newData;
-// });
-
-// newComponents.forEach((component) => {
-//   articleDiv.appendChild(component);
-// });
+}
+data.map((item) => {
+  return haberYapici(item)
+}).forEach((item) => {
+  articleDiv.appendChild(item);
+})

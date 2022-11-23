@@ -11,6 +11,7 @@ let menuElemanlari = [
 ];
 
 const headerDiv = document.querySelector(".header");
+
 function menuYapici() {
   const menuDiv = document.createElement("div");
   const ulElement = document.createElement("ul");
@@ -30,11 +31,7 @@ function menuYapici() {
   return menuDiv;
 }
 
-menuElemanlari.forEach((arrayItem) => {
-  let newButton = menuYapici(arrayItem);
-
-  headerDiv.appendChild(newButton);
-});
+headerDiv.appendChild(menuYapici(menuElemanlari))
 /*
   Adım 1: Aşağıdaki etiketlee gibi bir menü oluşturmak için 'menuYapici' adlı bir bileşen yazın:
 
